@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CAMPO CERRADO — FPS Militar</title>
-    <script type="module" crossorigin src="./assets/index-DBSbZvw5.js"></script>
+    <script type="module" crossorigin src="./assets/index-hA1qbbue.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-C4sU1cb8.css">
   </head>
   <body>
@@ -100,6 +100,7 @@
           <b>V</b> acostarse / levantarse · <b>B</b> binoculares infrarrojos (ven a los enemigos escondidos en rojo; batería limitada)<br />
           <b>E</b> junto a una escalera = subir / bajar. Las torres tienen un <b>cuarto con ventanas</b> (dispara desde dentro, a cubierto)
           y una escalera interior al <b>techo</b>; desde el techo puedes saltar para bajar rápido (la caída quita vida)<br />
+          Online: elige en la sala <b>cooperativo</b>, <b>todos contra todos</b> o <b>equipos de 2</b>, con o sin bots<br />
           Enemigos: soldados · <b>pesados</b> (blindados) · <b>francotiradores</b> en las torres (¡cuidado con el láser rojo!)
         </div>
         <div id="btnRow">
@@ -113,8 +114,8 @@
         <h2>SERVIDOR PRIVADO</h2>
         <div id="netHome">
           <div class="shint">
-            Juega en cooperativo con hasta 4 amigos contra las oleadas. Crea una sala y comparte el código, o entra con el código de un
-            amigo.
+            Hasta 4 jugadores: cooperativo contra las oleadas de bots, todos contra todos o equipos de 2 (con o sin bots). Crea una sala y
+            comparte el código, o entra con el código de un amigo.
           </div>
           <div class="srow nrow">
             <span>TU NOMBRE</span><input type="text" id="netName" maxlength="14" autocomplete="off" spellcheck="false" />
@@ -142,6 +143,21 @@
                 <option value="easy">FÁCIL</option>
                 <option value="normal">NORMAL</option>
                 <option value="hard">VETERANO</option>
+              </select>
+            </div>
+            <div class="srow nrow">
+              <span>MODO</span
+              ><select id="netMode">
+                <option value="coop">COOPERATIVO (todos contra los bots)</option>
+                <option value="ffa">TODOS CONTRA TODOS</option>
+                <option value="teams">EQUIPOS DE 2</option>
+              </select>
+            </div>
+            <div class="srow nrow">
+              <span>BOTS</span
+              ><select id="netBots">
+                <option value="1">CON BOTS</option>
+                <option value="0">SIN BOTS</option>
               </select>
             </div>
           </div>
