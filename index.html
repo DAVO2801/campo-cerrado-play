@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CAMPO CERRADO — FPS Militar</title>
+    <script type="module" crossorigin src="./assets/index-DBSbZvw5.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C4sU1cb8.css">
+  </head>
+  <body>
+    <div id="loading">
+      <h1>CAMPO CERRADO</h1>
+      <div class="lbar"><i id="loadFill"></i></div>
+      <div id="loadTxt">Cargando modelos y texturas…</div>
+    </div>
+    <div id="adsvig"></div>
+    <div id="shvig"></div>
+    <div id="flash"></div>
+    <div id="irOverlay" class="hidden">
+      <canvas id="irCanvas"></canvas>
+      <div id="irScan"></div>
+      <div id="irInfo"></div>
+    </div>
+    <div id="reticle" class="ring"><i></i></div>
+    <div id="scope">
+      <div class="sl h"></div>
+      <div class="sl v"></div>
+      <div class="rd"></div>
+      <div class="mil" style="margin: -52px 0 0 -1px"></div>
+      <div class="mil" style="margin: -104px 0 0 -1px"></div>
+      <div class="mil" style="margin: 51px 0 0 -1px"></div>
+      <div class="mil" style="margin: 103px 0 0 -1px"></div>
+      <div class="mil" style="margin: -1px 0 0 -52px"></div>
+      <div class="mil" style="margin: -1px 0 0 -104px"></div>
+      <div class="mil" style="margin: -1px 0 0 51px"></div>
+      <div class="mil" style="margin: -1px 0 0 103px"></div>
+      <div class="br" id="scopeBr"></div>
+    </div>
+    <div id="crosshair"><i></i><i></i><i></i><i></i><b></b></div>
+    <div id="hitmarker"></div>
+    <div id="vignette"></div>
+
+    <div id="hud" class="hidden">
+      <div id="top">
+        <div class="wave" id="waveTxt">OLEADA 1</div>
+        <div class="enemies" id="enemies">ENEMIGOS: 0</div>
+      </div>
+      <div id="msg"></div>
+      <div id="netHud" class="hidden"></div>
+      <div id="minimapWrap"><canvas id="minimap" width="150" height="150"></canvas></div>
+      <div id="state" id="stateTxt"></div>
+      <div id="irStat"></div>
+      <div id="prompt" class="hidden"></div>
+      <div id="inv"></div>
+      <div id="health">
+        <div class="slabel"><span>ESCUDO</span><span id="shieldNum">0</span></div>
+        <div class="bar shield"><div class="fill" id="shieldFill" style="width: 0%"></div></div>
+        <div class="label">SALUD</div>
+        <div class="bar"><div class="fill" id="healthFill"></div></div>
+        <div class="num" id="healthNum">100</div>
+      </div>
+      <div id="slots"></div>
+      <div id="ammo">
+        <div class="wname" id="wName">FUSIL M4</div>
+        <div class="reload" id="reloadTxt"></div>
+        <div class="mag" id="ammoMag">30</div>
+        <div class="res" id="ammoRes">/ 120</div>
+      </div>
+    </div>
+
+    <div id="overlay">
+      <div id="mainPanel">
+        <h1 id="ovTitle">CAMPO CERRADO</h1>
+        <div class="sub" id="ovSub">
+          Estás encerrado en un campo militar. Hay enemigos escondidos tras los obstáculos y entre los arbustos. Sobrevive a las oleadas:
+          cada una trae más enemigos, más duros y más precisos.
+        </div>
+        <div id="mapRow">
+          <span class="dl">MAPA</span>
+          <button class="mapbtn" data-m="campo">CAMPO MILITAR</button>
+          <button class="mapbtn" data-m="bosque">BOSQUE EN NIEBLA</button>
+          <button class="mapbtn" data-m="desierto">DESIERTO</button>
+          <button class="mapbtn" data-m="nieve">BASE NEVADA</button>
+        </div>
+        <div class="mapdesc" id="mapDesc"></div>
+        <div id="diffRow">
+          <span class="dl">DIFICULTAD</span>
+          <button class="diffbtn" data-d="easy">FÁCIL</button>
+          <button class="diffbtn on" data-d="normal">NORMAL</button>
+          <button class="diffbtn" data-d="hard">VETERANO</button>
+        </div>
+        <div class="keys">
+          <b>W A S D</b> mover · <b>SHIFT</b> correr · <b>C</b> agacharse / levantarse (alterna) · <b>SHIFT + C</b> corriendo = deslizarse ·
+          <b>ESPACIO</b> saltar<br />
+          <b>MOUSE</b> apuntar · <b>CLIC IZQ.</b> disparar · <b>CLIC DER.</b> apuntar con mira · <b>R</b> recargar<br />
+          <b>1</b> fusil (mira de punto rojo) · <b>2</b> pistola · <b>3</b> escopeta · <b>4</b> francotirador (o rueda del mouse)<br />
+          Francotirador: clic derecho = mira telescópica · <b>SHIFT</b> = contener la respiración<br />
+          <b>ALT</b> lanzar granada (explota a los 2 s, ¡también te daña a ti!) · <b>6</b> equipar escudo de 25 (el escudo absorbe daño
+          antes que tu salud; máx. 100)<br />
+          <b>V</b> acostarse / levantarse · <b>B</b> binoculares infrarrojos (ven a los enemigos escondidos en rojo; batería limitada)<br />
+          <b>E</b> junto a una escalera = subir / bajar. Las torres tienen un <b>cuarto con ventanas</b> (dispara desde dentro, a cubierto)
+          y una escalera interior al <b>techo</b>; desde el techo puedes saltar para bajar rápido (la caída quita vida)<br />
+          Enemigos: soldados · <b>pesados</b> (blindados) · <b>francotiradores</b> en las torres (¡cuidado con el láser rojo!)
+        </div>
+        <div id="btnRow">
+          <button id="ovBtn">JUGAR</button>
+          <button id="netBtn">🌐 SERVIDOR PRIVADO</button>
+        </div>
+        <button id="setBtn">⚙ AJUSTES</button>
+      </div>
+
+      <div id="netPanel" class="hidden">
+        <h2>SERVIDOR PRIVADO</h2>
+        <div id="netHome">
+          <div class="shint">
+            Juega en cooperativo con hasta 4 amigos contra las oleadas. Crea una sala y comparte el código, o entra con el código de un
+            amigo.
+          </div>
+          <div class="srow nrow">
+            <span>TU NOMBRE</span><input type="text" id="netName" maxlength="14" autocomplete="off" spellcheck="false" />
+          </div>
+          <button id="netCreate" class="netbtn">CREAR SALA PRIVADA</button>
+          <div class="nsep">— o —</div>
+          <div class="srow nrow">
+            <span>CÓDIGO DE SALA</span
+            ><input type="text" id="netCode" maxlength="6" autocomplete="off" spellcheck="false" placeholder="ABC123" />
+          </div>
+          <button id="netJoin" class="netbtn">UNIRSE A UNA SALA</button>
+        </div>
+        <div id="netLobby" class="hidden">
+          <div class="shint" id="netRoleTxt"></div>
+          <div id="netCodeBig"></div>
+          <button id="netCopy" class="netbtn small">COPIAR CÓDIGO</button>
+          <div id="netCfg">
+            <div class="srow nrow">
+              <span>MAPA</span
+              ><select id="netMap"></select>
+            </div>
+            <div class="srow nrow">
+              <span>DIFICULTAD</span
+              ><select id="netDiff">
+                <option value="easy">FÁCIL</option>
+                <option value="normal">NORMAL</option>
+                <option value="hard">VETERANO</option>
+              </select>
+            </div>
+          </div>
+          <div class="nplayers" id="netPlayers"></div>
+          <div class="shint" id="netInfo"></div>
+          <button id="netStart" class="netbtn">INICIAR PARTIDA</button>
+        </div>
+        <div class="netstatus" id="netStatus"></div>
+        <button id="netBack">VOLVER</button>
+      </div>
+
+      <div id="settings" class="hidden">
+        <h2>AJUSTES</h2>
+        <div class="srow">
+          <span>VOLUMEN GENERAL</span><span class="sv" id="vVol"></span><input type="range" id="sVol" min="0" max="1" step="0.01" />
+        </div>
+        <div class="srow">
+          <span>VOLUMEN AMBIENTE (VIENTO)</span><span class="sv" id="vAmb"></span
+          ><input type="range" id="sAmb" min="0" max="1" step="0.01" />
+        </div>
+        <div class="srow">
+          <span>SENSIBILIDAD DEL MOUSE</span><span class="sv" id="vSens"></span
+          ><input type="range" id="sSens" min="0.1" max="2.5" step="0.05" />
+        </div>
+        <div class="srow">
+          <span>SENSIBILIDAD AL APUNTAR (MIRA)</span><span class="sv" id="vAds"></span
+          ><input type="range" id="sAds" min="0.1" max="1.5" step="0.05" />
+        </div>
+        <div class="srow">
+          <span>CAMPO DE VISIÓN</span><span class="sv" id="vFov"></span><input type="range" id="sFov" min="60" max="100" step="1" />
+        </div>
+        <div class="srow">
+          <span>CALIDAD GRÁFICA</span
+          ><select id="sQual">
+            <option value="low">BAJA (más fluido)</option>
+            <option value="medium">MEDIA</option>
+            <option value="high">ALTA (más realista)</option>
+          </select>
+        </div>
+        <div class="shint">
+          Los cambios se aplican al instante y se guardan en este navegador.<br />Si el juego va lento, baja la calidad gráfica.
+        </div>
+        <button id="setBack">VOLVER</button>
+      </div>
+    </div>
+
+  </body>
+</html>
